@@ -26,7 +26,7 @@ void loop() {
   // Lire la durée de l'état haute sur la broche "Echo"
   unsigned long duree = pulseIn(echo, HIGH); // en microseconds
 
-  if (duree > 30,000)
+  if (duree > 30000)
   {
     Serial.println("Onde perdue!");
   }
@@ -35,7 +35,7 @@ void loop() {
     duree /= 2;
 
     float temps = duree / 1000000.0; // on met en seconds
-    float distance = temps * VITESSE;
+    float distance = temps * VITESSE * 100;
 
     Serial.print("Duree = ");
     Serial.println(temps);
