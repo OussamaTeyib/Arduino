@@ -2,8 +2,8 @@
  * Sans l'utlisation d'un écran (Version portable)
  */
 
-// La vitesse du son à 25 °C
-#define VITESSE 340
+// La vitesse du son à 30 °C
+#define VITESSE 348.94
 // Les broches
 const int trig = 7;
 const int echo = 8;
@@ -26,7 +26,9 @@ void loop() {
   // Lire la durée de l'état haute sur la broche "Echo"
   unsigned long duree = pulseIn(echo, HIGH); // en microseconds
 
-  if (duree > 30000)
+  unsigned long t_max = 30000; // on va le changer
+
+  if (duree > t_max)
   {
     Serial.println("Onde perdue!");
   }
@@ -34,15 +36,15 @@ void loop() {
   {
     duree /= 2;
 
-    float temps = duree / 1000000.0; // on met en seconds
-    float distance = temps * VITESSE * 100;
+    float temps = duree / 1000000.0;
+    float distance = temps * VITESSE;
 
     Serial.print("Duree = ");
     Serial.println(temps);
     Serial.print("Distance = ");
-    Serial.println(distance);
+    Serial.println(distance * 100); // en centimétres
   }
 
-  // petite pause
+  // pause
   delay(256);
 }
